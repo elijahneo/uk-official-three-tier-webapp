@@ -1,0 +1,33 @@
+﻿{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "virtualMachinesExtensionSettings": {
+      "metadata": {
+        "description": "VM settings for enabling windows authentication"
+      },
+      "value": [
+        {
+          "vms": [ "az-patchdl-wsus-vm1" ],
+          "extensions": [
+            {
+              "name": "configure-wsus",
+              "publisher": "Microsoft.Compute",
+              "type": "CustomScriptExtension",
+              "typeHandlerVersion": "1.8",
+              "autoUpgradeMinorVersion": false,
+              "settingsConfigMapperUri": "https://raw.githubusercontent.com/elijahneo/uk-official-three-tier-webapp/master/templates/onpremise/wsus-extension-settings-mapper.json",
+              "settingsConfig": {
+                "fileUris": [
+                  "https://raw.githubusercontent.com/elijahneo/uk-official-three-tier-webapp/master/extensions/deploy-wsus.ps1"
+                ]
+              },
+              "protectedSettingsConfig": {
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
